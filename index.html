@@ -3,54 +3,321 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Clover Hollow Support</title>
-<meta name="description" content="Help and contact for Clover Hollow, a cozy farming game for iPhone by Kiro Games.">
+<title>Clover Hollow: Cozy Farm</title>
+<meta name="description" content="Clover Hollow is a cozy farming game for iPhone by Kiro Games. Grow crops, raise animals, bake and craft, run a farm market. Plays offline, saves to iCloud, no ads, no tracking. Support and FAQ inside.">
+<meta name="theme-color" content="#4f9f3a">
+<link rel="icon" type="image/png" href="img/icon.png">
+<link rel="apple-touch-icon" href="img/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root { --ink:#3b2b1c; --ink2:#6f5a45; --paper:#fffdf7; --cream:#fff8e8; --line:#ecdcbc; --leaf:#3f8a2e; --link:#2f6f9f; }
-  @media (prefers-color-scheme: dark) { :root { --ink:#f3ead9; --ink2:#cbbba3; --paper:#1f1b16; --cream:#29231c; --line:#4a3f31; --leaf:#8fd06b; --link:#8cc2ef; } }
+  :root {
+    --leaf: #4f9f3a;
+    --leaf-deep: #347a25;
+    --leaf-soft: #e4f1dc;
+    --cream: #fff8e8;
+    --paper: #fffdf7;
+    --gold: #f3b330;
+    --gold-soft: #fff1c8;
+    --ink: #3b2b1c;
+    --ink2: #6f5a45;
+    --line: #ecdcbc;
+    --link: #2f6f9f;
+    --shadow: 0 10px 30px rgba(59, 43, 28, .10);
+    --shadow-sm: 0 4px 14px rgba(59, 43, 28, .08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --leaf: #6fbf58;
+      --leaf-deep: #4f9f3a;
+      --leaf-soft: #22301c;
+      --cream: #1c1813;
+      --paper: #27211a;
+      --gold: #f3b330;
+      --gold-soft: #4a3910;
+      --ink: #f3ead9;
+      --ink2: #cbbba3;
+      --line: #46392b;
+      --link: #8cc2ef;
+      --shadow: 0 10px 30px rgba(0, 0, 0, .35);
+      --shadow-sm: 0 4px 14px rgba(0, 0, 0, .3);
+    }
+  }
+
   * { box-sizing: border-box; }
-  body { margin: 0; background: var(--cream); color: var(--ink); font: 16px/1.6 -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif; }
-  main { max-width: 760px; margin: 0 auto; padding: 32px 20px 64px; }
-  h1 { font-size: 2rem; line-height: 1.2; margin: 0 0 4px; }
-  h1 span { color: var(--leaf); }
-  h2 { font-size: 1.2rem; margin: 2em 0 .4em; }
-  p, li { color: var(--ink); }
-  .meta { color: var(--ink2); margin: 0 0 24px; }
-  .summary { background: var(--paper); border: 1px solid var(--line); border-radius: 16px; padding: 18px 22px; }
-  .summary ul { margin: 0; padding-left: 1.2em; }
-  .summary li { margin: .25em 0; }
-  table { width: 100%; border-collapse: collapse; margin: .6em 0; font-size: .95rem; }
-  th, td { text-align: left; vertical-align: top; padding: 8px 10px; border-bottom: 1px solid var(--line); }
-  th { color: var(--ink2); font-weight: 600; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--ink);
+    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+    overflow-x: hidden;
+  }
+  img { display: block; max-width: 100%; height: auto; }
   a { color: var(--link); }
-  code { font: .9em ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--paper); padding: 1px 5px; border-radius: 6px; border: 1px solid var(--line); }
-  .ph { background: #fff1b8; color: #5a4300; padding: 0 4px; border-radius: 4px; }
-  @media (prefers-color-scheme: dark) { .ph { background: #5a4a10; color: #fff1b8; } }
-  footer { margin-top: 40px; color: var(--ink2); font-size: .9rem; }
+  h1, h2, h3, .display { font-family: "Fredoka", -apple-system, system-ui, sans-serif; font-weight: 700; letter-spacing: .005em; }
+  h2 { font-size: clamp(1.6rem, 2.2vw + 1rem, 2.2rem); line-height: 1.15; margin: 0 0 .5em; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+  .narrow { max-width: 760px; }
+  section { padding: 56px 0; }
+  .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    background: linear-gradient(180deg, var(--leaf) 0%, var(--leaf-deep) 100%);
+    color: #fff;
+    padding: 56px 0 84px;
+    overflow: hidden;
+  }
+  .hero::after {
+    /* rolling hill edge into the cream body */
+    content: "";
+    position: absolute; left: -10%; right: -10%; bottom: -60px;
+    height: 120px;
+    background: var(--cream);
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  }
+  .hero .wrap { position: relative; z-index: 1; text-align: center; }
+  .hero .icon {
+    width: 128px; height: 128px;
+    margin: 0 auto 20px;
+    border-radius: 29px;
+    box-shadow: 0 14px 34px rgba(0, 0, 0, .25), 0 0 0 4px rgba(255, 255, 255, .35);
+  }
+  .hero h1 {
+    font-size: clamp(2.6rem, 6vw + 1rem, 4.4rem);
+    line-height: 1;
+    margin: 0 0 10px;
+    text-shadow: 0 3px 0 rgba(0, 0, 0, .12);
+  }
+  .hero .tagline {
+    font-family: "Fredoka", -apple-system, system-ui, sans-serif;
+    font-weight: 600;
+    font-size: clamp(1.15rem, 1.2vw + .9rem, 1.5rem);
+    color: var(--gold-soft);
+    margin: 0 0 16px;
+  }
+  @media (prefers-color-scheme: dark) { .hero .tagline { color: #ffe39a; } }
+  .hero .pitch {
+    max-width: 560px;
+    margin: 0 auto 26px;
+    font-size: 1.05rem;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, .92);
+  }
+  .pill {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--gold);
+    color: #3b2b1c;
+    font-family: "Fredoka", -apple-system, system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    padding: 13px 24px;
+    border-radius: 999px;
+    box-shadow: 0 6px 0 rgba(0, 0, 0, .14), 0 12px 24px rgba(0, 0, 0, .18);
+    white-space: nowrap;
+  }
+  .pill svg { width: 22px; height: 22px; flex: none; }
+  .hero .note { margin: 14px 0 0; font-size: .9rem; color: rgba(255, 255, 255, .8); }
+  .hero .note a { color: #fff; }
+
+  /* Screenshots */
+  .shots { padding-top: 8px; }
+  .shots h2, .features h2 { text-align: center; }
+  .shot-row {
+    display: flex; gap: 16px;
+    overflow-x: auto;
+    padding: 12px 16px 28px;
+    margin: 0 -16px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .shot-row::-webkit-scrollbar { display: none; }
+  .shot-row figure {
+    flex: 0 0 66%;
+    max-width: 260px;
+    margin: 0;
+    scroll-snap-align: center;
+  }
+  .shot-row img {
+    width: 100%;
+    border-radius: 22px;
+    box-shadow: var(--shadow);
+    border: 4px solid var(--paper);
+  }
+  .shots .hint { text-align: center; color: var(--ink2); font-size: .9rem; margin: 0; }
+  @media (min-width: 720px) {
+    .shot-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+      overflow: visible;
+      padding: 8px 0 0;
+      margin: 0;
+    }
+    .shot-row figure { max-width: none; }
+    .shots .hint { display: none; }
+  }
+  @media (min-width: 1000px) {
+    .shot-row { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 16px; }
+  }
+
+  /* Features */
+  .features { background: var(--leaf-soft); padding: 56px 0 64px; }
+  .feature-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin: 28px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  @media (min-width: 560px) { .feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 900px) { .feature-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .feature {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 20px 20px 18px;
+    box-shadow: var(--shadow-sm);
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  @media (min-width: 900px) { .feature { flex-direction: column; gap: 10px; } }
+  .feature .em {
+    flex: none;
+    width: 48px; height: 48px;
+    border-radius: 14px;
+    background: var(--gold-soft);
+    display: grid; place-items: center;
+    font-size: 26px; line-height: 1;
+  }
+  .feature h3 { margin: 0 0 3px; font-size: 1.15rem; line-height: 1.2; }
+  .feature p { margin: 0; color: var(--ink2); font-size: .95rem; line-height: 1.45; }
+
+  /* Support */
+  .support h2 { text-align: left; }
+  .support h2 span { color: var(--leaf); }
+  .meta { color: var(--ink2); margin: 0 0 24px; }
+  .summary {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-left: 6px solid var(--gold);
+    border-radius: 16px;
+    padding: 18px 22px;
+    box-shadow: var(--shadow-sm);
+  }
+  .support h3 { font-size: 1.35rem; margin: 2em 0 .6em; }
+  .faq { margin: 0; padding: 0; list-style: none; }
+  .faq li {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin: 0 0 12px;
+  }
+  .faq strong { display: block; font-family: "Fredoka", -apple-system, system-ui, sans-serif; font-weight: 600; font-size: 1.08rem; color: var(--leaf-deep); margin-bottom: 4px; }
+  @media (prefers-color-scheme: dark) { .faq strong { color: var(--leaf); } }
+  .faq p { margin: 0; }
+  .privacy { margin-top: 32px; }
+
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 28px 0 44px;
+    color: var(--ink2);
+    font-size: .9rem;
+    text-align: center;
+  }
+  footer .brand { font-family: "Fredoka", -apple-system, system-ui, sans-serif; font-weight: 600; color: var(--ink); }
+  footer nav { margin-top: 6px; }
+  footer nav a { margin: 0 8px; }
+
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 </style>
 </head>
 <body>
-<main>
-  <h1>Clover <span>Hollow</span> Support</h1>
-  <p class="meta">A cozy farming game for iPhone · by Kiro Games</p>
 
-  <div class="summary">
-    <strong>Need help?</strong>
-    <p style="margin:.4em 0 0">Email <a href="mailto:joshkirouff@gmail.com?subject=Clover%20Hollow%20support">joshkirouff@gmail.com</a>. Tell us your iPhone model, iOS version, and what happened. We usually reply within two business days.</p>
+<header class="hero">
+  <div class="wrap">
+    <img class="icon" src="img/icon.png" width="128" height="128" alt="Clover Hollow app icon: a red barn with a shining four-leaf clover">
+    <h1>Clover Hollow</h1>
+    <p class="tagline">A cozy farming game for iPhone</p>
+    <p class="pitch">Your aunt left you her little farm at the edge of the woods. Plant fields, raise happy animals, bake for the neighbors and grow the hollow at your own pace. No account, no ads, no internet needed.</p>
+    <span class="pill" role="status" aria-label="Coming soon to the App Store">
+      <svg viewBox="0 0 24 24" aria-hidden="true" fill="#347a25"><circle cx="8.5" cy="7.5" r="4"/><circle cx="15.5" cy="7.5" r="4"/><circle cx="8.5" cy="14.5" r="4"/><circle cx="15.5" cy="14.5" r="4"/><path d="M11 17.5h2l1.2 5h-4.4z"/></svg>
+      Coming soon to the App Store
+    </span>
+    <p class="note">Already playing? Jump to <a href="#support">support &amp; FAQ</a>.</p>
   </div>
+</header>
 
-  <h2>Common questions</h2>
-  <p><strong>How do I get my farm on a new iPhone?</strong><br>Your farm saves to your own iCloud automatically. Sign in to the same Apple Account on the new iPhone, install Clover Hollow, and open it. Your farm comes back on its own.</p>
-  <p><strong>I bought the Starter Pack but don't have it.</strong><br>Open Settings in the game (the gear button) or the clover shop and tap <em>Restore purchases</em>. Clover packs are used up when you spend them, so only the Starter Pack can be restored.</p>
-  <p><strong>A purchase is "waiting for approval".</strong><br>That's Apple's Ask to Buy. When a parent approves it, the clovers arrive the next time you open the game.</p>
-  <p><strong>How do I get a refund?</strong><br>Refunds are handled by Apple. Visit <a href="https://reportaproblem.apple.com">reportaproblem.apple.com</a>.</p>
-  <p><strong>How do I turn reminders on or off?</strong><br>In the game, open Settings and use the <em>Reminders</em> switch. You can also change it in iOS Settings › Notifications › Clover Hollow.</p>
-  <p><strong>Do clovers expire?</strong><br>No. Clovers you buy or earn never expire.</p>
+<main>
+  <section class="shots" aria-labelledby="shots-h">
+    <div class="wrap">
+      <h2 id="shots-h">Take a peek at the hollow</h2>
+      <div class="shot-row">
+        <figure><img src="img/shot-1.jpg" width="600" height="1304" alt="Screenshot: an overhead view of a bustling farm with colourful houses, a red barn and market stalls. Caption: Grow your dream farm" loading="eager"></figure>
+        <figure><img src="img/shot-2.jpg" width="600" height="1304" alt="Screenshot: fields of corn, sunflowers and pumpkins beside cozy houses. Caption: Plant and harvest" loading="lazy"></figure>
+        <figure><img src="img/shot-3.jpg" width="600" height="1304" alt="Screenshot: a pasture with cows, sheep and a red barn. Caption: Raise happy animals" loading="lazy"></figure>
+        <figure><img src="img/shot-4.jpg" width="600" height="1304" alt="Screenshot: the Bakery queue with bread and cookies ready to make. Caption: Bake and craft" loading="lazy"></figure>
+        <figure><img src="img/shot-5.jpg" width="600" height="1304" alt="Screenshot: the Farmer's Market stalls in autumn. Caption: Run a farm market" loading="lazy"></figure>
+        <figure><img src="img/shot-6.jpg" width="600" height="1304" alt="Screenshot: the Album page with crop and goods stamps, 51 of 57 collected. Caption: Collect them all" loading="lazy"></figure>
+      </div>
+      <p class="hint">Swipe to see more →</p>
+    </div>
+  </section>
 
-  <h2>Privacy</h2>
-  <p>No account, no ads, no tracking. Read the full <a href="privacy.html">privacy policy</a>.</p>
+  <section class="features" aria-labelledby="features-h">
+    <div class="wrap">
+      <h2 id="features-h">So much to do, no rush to do it</h2>
+      <ul class="feature-grid">
+        <li class="feature"><span class="em" aria-hidden="true">🌽</span><div><h3>Grow crops</h3><p>Wheat, pumpkins, strawberries, sunflowers and orchards of fruit. Tap to harvest.</p></div></li>
+        <li class="feature"><span class="em" aria-hidden="true">🐔</span><div><h3>Raise animals</h3><p>Chickens, cows, sheep, goats, ducks, pigs and fluffy alpacas. Collect eggs, milk and wool.</p></div></li>
+        <li class="feature"><span class="em" aria-hidden="true">🥖</span><div><h3>Bake &amp; craft</h3><p>Bake bread and pizza, churn cheese, press juice, can salsa and sew quilts.</p></div></li>
+        <li class="feature"><span class="em" aria-hidden="true">🧺</span><div><h3>Run a farm market</h3><p>Fill neighbor orders, load the delivery truck and stock your market stalls.</p></div></li>
+        <li class="feature"><span class="em" aria-hidden="true">📔</span><div><h3>Collect album stamps</h3><p>Earn a stamp for every good you make and fill your album page by page.</p></div></li>
+        <li class="feature"><span class="em" aria-hidden="true">✈️</span><div><h3>Plays offline</h3><p>On a plane, on the train, in the garden. No internet connection needed.</p></div></li>
+        <li class="feature"><span class="em" aria-hidden="true">☁️</span><div><h3>iCloud save</h3><p>Your farm saves automatically and follows you to a new iPhone.</p></div></li>
+        <li class="feature"><span class="em" aria-hidden="true">🍀</span><div><h3>No ads, no tracking</h3><p>No account either. Just you, your fields, and some very happy chickens.</p></div></li>
+      </ul>
+    </div>
+  </section>
 
-  <footer>Clover Hollow © 2026 Kiro Games. Apple, App Store, and iCloud are trademarks of Apple Inc.</footer>
+  <section class="support" id="support" aria-labelledby="support-h">
+    <div class="wrap narrow">
+      <h2 id="support-h">Clover <span>Hollow</span> Support</h2>
+      <p class="meta">A cozy farming game for iPhone · by Kiro Games</p>
+
+      <div class="summary">
+        <strong>Need help?</strong>
+        <p style="margin:.4em 0 0">Email <a href="mailto:joshkirouff@gmail.com?subject=Clover%20Hollow%20support">joshkirouff@gmail.com</a>. Tell us your iPhone model, iOS version, and what happened. We usually reply within two business days.</p>
+      </div>
+
+      <h3>Common questions</h3>
+      <ul class="faq">
+        <li><strong>How do I get my farm on a new iPhone?</strong><p>Your farm saves to your own iCloud automatically. Sign in to the same Apple Account on the new iPhone, install Clover Hollow, and open it. Your farm comes back on its own.</p></li>
+        <li><strong>I bought the Starter Pack but don't have it.</strong><p>Open Settings in the game (the gear button) or the clover shop and tap <em>Restore purchases</em>. Clover packs are used up when you spend them, so only the Starter Pack can be restored.</p></li>
+        <li><strong>A purchase is "waiting for approval".</strong><p>That's Apple's Ask to Buy. When a parent approves it, the clovers arrive the next time you open the game.</p></li>
+        <li><strong>How do I get a refund?</strong><p>Refunds are handled by Apple. Visit <a href="https://reportaproblem.apple.com">reportaproblem.apple.com</a>.</p></li>
+        <li><strong>How do I turn reminders on or off?</strong><p>In the game, open Settings and use the <em>Reminders</em> switch. You can also change it in iOS Settings › Notifications › Clover Hollow.</p></li>
+        <li><strong>Do clovers expire?</strong><p>No. Clovers you buy or earn never expire.</p></li>
+      </ul>
+
+      <h3 class="privacy">Privacy</h3>
+      <p>No account, no ads, no tracking. Read the full <a href="privacy.html">privacy policy</a>.</p>
+    </div>
+  </section>
 </main>
+
+<footer>
+  <div class="wrap">
+    <div class="brand">Clover Hollow © 2026 Kiro Games</div>
+    <div>Apple, App Store, and iCloud are trademarks of Apple Inc.</div>
+    <nav><a href="#support">Support</a> · <a href="privacy.html">Privacy policy</a> · <a href="mailto:joshkirouff@gmail.com?subject=Clover%20Hollow%20support">Contact</a></nav>
+  </div>
+</footer>
+
 </body>
 </html>
